@@ -1,0 +1,66 @@
+Explain in detail:
+* HDFS
+* Hadoop cluster
+* HDFS Blocks
+
+Hadoop Distributed File System:
+
+*HDFS is a distributed file system designed to run on commmodity hardware.
+*It has some similarities with the existing distributed file systems.
+*Advantage of using HDFS is, it is highly fault-tolerant and designed to deploy on low cost hardware.
+*Provides high throughput access to application data and is suitable for applications having large volume of data.
+*When it takes in the input data, it breaks the information into independent pieces and distributes them to different nodes
+in a cluster allowing parallel processing.
+*The file system also copies each piece of these data multiple times and distributes the copies to the individual nodes and atleast one copy is on different server.
+*If any failure occurs, the data on nodes that crash can be found in another node within a cluster.
+*The NameNode monitors the number of replicas of a block. When a block is lost due to a DataNode failure or disk failure, the NameNode creates another replica
+of the block.
+*The NameNode maintains the namespace tree and the mapping of blocks to DataNodes holding the entire namespace image in RAM.
+*The NameNode doesnt directly send requests to DataNodes.
+*It sends instructions to the DataNodes by replying to heartbeats sent by those DataNodes.
+*HDFS is built to support applications with larger data sets.
+*It uses master/slave architecture with each cluster consisting of a single NameNode that manages file system operations
+and supporting DataNodes that manage data storage on individual compute nodes.
+
+Hadoop Cluster:
+
+*Generally any set of loosely coupled or tightly coupled systems that work together as a single system is called as cluster.
+*Cluster which is used for Hadoop is known as Hadoop Cluster.
+*Hadoop cluster is a special type of computational cluster designed for storing and analyzing vast amount of unstructured data 
+in distributed computing environment.
+*These clusters run on low cost commodity  hardware.
+*They are most commonly referred as shared nothing systems because the only thing that is shared between the nodes is the
+network that links them together.
+*Hadoop cluster consists of 3 components
+1.Client
+2.Master
+3.Slave
+
+Client:
+* It is neither master nor slave, rather play the role of loading the data into the cluster.
+*submits the MapReduce jobs describing how the data should be processed and retrieved after completion of job.
+
+Master:
+*It consists of 3 components such as NameNode, Secondary NameNode and JobTracker.
+*NameNode: It doesnt store any files but only the file's meta data.
+*Secondary NameNode: It is not the back up or replica of the NameNode. The job of the Secondary NameNode is to contact
+NameNode periodically. Suppose if the NameNode crashes, the Secondary NameNode contacts the NameNode and pulls
+the copy of metadata information out of NameNode.
+*Slaves: They are the majority of machines in Hadoop cluster and are responsible to store the data and process. Each slave runs both DataNode and TaskTracker daemon
+which communicates to their masters.
+
+HDFS Blocks:
+
+*Hadoop Distributed File System also stores the data in terms of blocks.
+*The size of the HDFS blocks are very large.
+*The default size of the block is 64MB.
+*The files are split into 64MB blocks and then stored into the hadoop filesystem.
+
+Advantages:
+
+*The blocks are of fixed size and easy to calcutae the number of blocks that can be stored on disk.
+*HDFS block concept simplifies the storage of DataNodes.
+*If the file size is less than the HDFS block size then the files doesnt occupy the complete block storage.
+*Blocks are easy to replicate between the datanodes and provides fault tolerance and high availability.
+
+
